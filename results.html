@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podio — Veterinary AI Hackathon</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container-wide">
+    <h1 class="main-title">🏆 Tablero de resultados</h1>
+    <p class="subtitle">Se actualiza automáticamente cada 5 segundos</p>
+
+    <nav class="top-nav">
+      <a class="btn btn-secondary" href="/">Votar</a>
+      <button id="refresh-btn" class="btn btn-light" type="button">Actualizar ahora</button>
+    </nav>
+
+    <div id="status-bar" class="status-bar">Cargando resultados…</div>
+
+    <div id="podium-grid" class="podium-grid">
+      <div class="podium-empty">Esperando votos…</div>
+    </div>
+
+    <div class="card-light">
+      <h2 style="font-family:'Playfair Display',serif;margin-bottom:16px;">Puntajes detallados</h2>
+      <div id="scores-table-container"></div>
+    </div>
+
+    <div class="card-light admin-panel">
+      <h3>Panel del profesor</h3>
+      <p style="color:var(--grey);font-size:0.9rem;margin-bottom:12px;">
+        Usa el PIN de administrador para ver quién falta o reiniciar la votación.
+      </p>
+      <div class="admin-actions">
+        <input type="password" id="admin-pin" placeholder="PIN admin" autocomplete="off">
+        <button id="admin-status-btn" class="btn btn-secondary" type="button">Ver estado</button>
+        <button id="admin-reset-btn" class="btn btn-primary" type="button">Reiniciar votos</button>
+      </div>
+      <div id="admin-alert" class="alert alert-info hidden" style="margin-top:12px;"></div>
+    </div>
+
+    <p class="footer-note">Veterinary AI Hackathon · Proyecta esta pantalla al final del taller</p>
+  </div>
+
+  <script src="/js/results.js"></script>
+</body>
+</html>

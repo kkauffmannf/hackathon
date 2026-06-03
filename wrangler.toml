@@ -1,0 +1,8 @@
+name = "hackathon-votacion"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hackathon-votes"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"

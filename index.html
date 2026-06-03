@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votación — Veterinary AI Hackathon</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="main-title">🐾 Votación del Hackathon</h1>
+    <p class="subtitle">Evalúa a los otros grupos con la rúbrica del taller</p>
+
+    <nav class="top-nav">
+      <a class="btn btn-secondary" href="/">Votar</a>
+      <a class="btn btn-light" href="/results.html">Ver podio</a>
+    </nav>
+
+    <section id="pin-screen" class="card">
+      <h2 style="color:#fff;font-family:'Playfair Display',serif;margin-bottom:16px;">Ingresa el PIN de tu grupo</h2>
+      <p style="color:var(--grey);margin-bottom:20px;font-size:0.92rem;">
+        El profesor te enviará un PIN privado por chat. Solo puedes votar una vez.
+      </p>
+      <form id="pin-form">
+        <label for="pin-input">PIN del grupo</label>
+        <input type="password" id="pin-input" inputmode="numeric" autocomplete="off" placeholder="Ej: 4821" required>
+        <div style="margin-top:16px;">
+          <button type="submit" class="btn btn-primary">Entrar a votar</button>
+        </div>
+      </form>
+      <div id="pin-alert" class="alert alert-error hidden"></div>
+    </section>
+
+    <section id="vote-screen" class="hidden">
+      <div id="session-badge" class="session-badge hidden"></div>
+      <form id="vote-form">
+        <div id="vote-form-container"></div>
+        <div class="submit-row card" style="margin-top:0;padding:20px;">
+          <p class="submit-note">Marca los criterios que cumple cada grupo. No puedes editar después de enviar.</p>
+          <button type="submit" id="submit-vote-btn" class="btn btn-primary">Enviar votación</button>
+        </div>
+        <div id="vote-alert" class="alert alert-error hidden"></div>
+      </form>
+    </section>
+
+    <section id="done-screen" class="card hidden">
+      <h2 style="color:var(--lime);font-family:'Playfair Display',serif;margin-bottom:12px;">¡Voto registrado!</h2>
+      <p style="color:rgba(255,255,255,0.85);margin-bottom:20px;">
+        Gracias por evaluar. Ya no puedes votar de nuevo con este grupo.
+      </p>
+      <a href="/results.html" class="btn btn-primary">Ver tablero de resultados</a>
+    </section>
+
+    <p class="footer-note">Veterinary AI Hackathon · Votación entre pares</p>
+  </div>
+
+  <script src="/js/vote.js"></script>
+</body>
+</html>
