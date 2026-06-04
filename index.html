@@ -32,7 +32,10 @@
     </section>
 
     <section id="vote-screen" class="hidden">
-      <div id="session-badge" class="session-badge hidden"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
+        <div id="session-badge" class="session-badge hidden" style="margin-bottom:0;"></div>
+        <button type="button" id="exit-session-btn" class="btn btn-light hidden">Volver al inicio</button>
+      </div>
       <form id="vote-form">
         <div id="vote-form-container"></div>
         <div class="submit-row card" style="margin-top:0;padding:20px;">

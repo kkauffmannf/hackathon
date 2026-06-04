@@ -57,6 +57,21 @@ function bufferToHex(buffer) {
   return [...new Uint8Array(buffer)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
+
+export async function getVotingEpoch(env) {
+  const row = await env.DB.prepare(
+    "SELECT value FROM meta WHERE key = 'voting_epoch'"
+  ).first();
+  return row ? Number(row.value) || 0 : 0;
+}
+
+export async function incrementVotingEpoch(env) {
+  await env.DB.prepare(
+    `INSERT INTO meta (key, value) VALUES ('voting_epoch', '1')
+     ON CONFLICT(key) DO UPDATE SET value = CAST(CAST(value AS INTEGER) + 1 AS TEXT)`
+  ).run();
+}
+
 async function hmacSign(message, secret) {
   const key = await crypto.subtle.importKey(
     'raw',
@@ -71,8 +86,9 @@ async function hmacSign(message, secret) {
 
 export async function createToken(group, env) {
   const secret = env.TOKEN_SECRET || 'dev-secret-change-me';
+  const epoch = await getVotingEpoch(env);
   const expires = Date.now() + 2 * 60 * 60 * 1000;
-  const payload = `${group}:${expires}`;
+  const payload = `${group}:${expires}:${epoch}`;
   const sig = await hmacSign(payload, secret);
   return btoa(`${payload}:${sig}`);
 }
@@ -84,15 +100,18 @@ export async function verifyToken(token, env) {
   try {
     const decoded = atob(token);
     const parts = decoded.split(':');
-    if (parts.length !== 3) return null;
+    if (parts.length !== 4) return null;
 
-    const [group, expiresStr, sig] = parts;
+    const [group, expiresStr, epochStr, sig] = parts;
     if (!GROUPS.includes(group)) return null;
 
     const expires = Number(expiresStr);
     if (!Number.isFinite(expires) || Date.now() > expires) return null;
 
-    const expected = await hmacSign(`${group}:${expiresStr}`, secret);
+    const currentEpoch = await getVotingEpoch(env);
+    if (Number(epochStr) !== currentEpoch) return null;
+
+    const expected = await hmacSign(`${group}:${expiresStr}:${epochStr}`, secret);
     if (sig !== expected) return null;
 
     return group;

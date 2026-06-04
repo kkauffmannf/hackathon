@@ -1,4 +1,4 @@
-import { GROUPS, corsHeaders, errorResponse, jsonResponse } from '../lib/utils.js';
+import { GROUPS, corsHeaders, errorResponse, incrementVotingEpoch, jsonResponse } from '../lib/utils.js';
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -14,7 +14,8 @@ export async function onRequestPost(context) {
 
     if (action === 'reset') {
       await env.DB.prepare('DELETE FROM votes').run();
-      return jsonResponse({ ok: true, message: 'Todos los votos fueron eliminados' });
+      await incrementVotingEpoch(env);
+      return jsonResponse({ ok: true, message: 'Todos los votos fueron eliminados. Las sesiones abiertas quedaron invalidadas.' });
     }
 
     if (action === 'status') {

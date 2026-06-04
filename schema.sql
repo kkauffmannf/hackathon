@@ -3,3 +3,10 @@ CREATE TABLE IF NOT EXISTS votes (
   scores_json TEXT NOT NULL,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+CREATE TABLE IF NOT EXISTS meta (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);
+
+INSERT OR IGNORE INTO meta (key, value) VALUES ('voting_epoch', '0');

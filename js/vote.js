@@ -47,21 +47,31 @@ function hideAlert(container) {
   container.textContent = '';
 }
 
+async function apiRequest(path, options = {}) {
+  const response = await fetch(path, options);
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = new Error(data.error || 'Error de conexión');
+    error.status = response.status;
+    throw error;
+  }
+  return data;
+}
+
 async function apiPost(path, body, token) {
   const headers = { 'Content-Type': 'application/json' };
   if (token) headers.Authorization = `Bearer ${token}`;
-
-  const response = await fetch(path, {
+  return apiRequest(path, {
     method: 'POST',
     headers,
     body: JSON.stringify(body),
   });
+}
 
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(data.error || 'Error de conexión');
-  }
-  return data;
+async function apiGet(path, token) {
+  const headers = {};
+  if (token) headers.Authorization = `Bearer ${token}`;
+  return apiRequest(path, { headers });
 }
 
 function saveSession(data) {
@@ -166,18 +176,67 @@ function collectScores() {
   return scores;
 }
 
+function showPinScreen(message) {
+  hide(document.getElementById('vote-screen'));
+  hide(document.getElementById('done-screen'));
+  hide(document.getElementById('session-badge'));
+  hide(document.getElementById('exit-session-btn'));
+  show(document.getElementById('pin-screen'));
+
+  const alert = document.getElementById('pin-alert');
+  if (message) {
+    showAlert(alert, message, 'error');
+  } else {
+    hideAlert(alert);
+  }
+
+  const pinInput = document.getElementById('pin-input');
+  pinInput.value = '';
+  pinInput.focus();
+}
+
 function showVoteScreen(data) {
   hide(document.getElementById('pin-screen'));
+  hide(document.getElementById('done-screen'));
+  hideAlert(document.getElementById('pin-alert'));
   show(document.getElementById('vote-screen'));
   show(document.getElementById('session-badge'));
+  show(document.getElementById('exit-session-btn'));
   document.getElementById('session-badge').textContent =
     `Votando como Grupo ${data.group} — ${data.groupName}`;
   renderVoteForm(data.group);
 }
 
 function showDoneScreen() {
+  hide(document.getElementById('pin-screen'));
   hide(document.getElementById('vote-screen'));
+  hide(document.getElementById('session-badge'));
+  hide(document.getElementById('exit-session-btn'));
   show(document.getElementById('done-screen'));
+}
+
+function handleExitSession() {
+  clearSession();
+  showPinScreen();
+}
+
+async function restoreSession(saved) {
+  try {
+    const data = await apiGet('/api/session', saved.token);
+    session = { ...saved, ...data };
+    saveSession(session);
+    showVoteScreen(session);
+  } catch (error) {
+    clearSession();
+    if (error.status === 409) {
+      showDoneScreen();
+      return;
+    }
+    const message = error.status === 401
+      ? 'La sesión expiró o el profesor reinició la votación. Ingresa tu PIN de nuevo.'
+      : error.message;
+    showPinScreen(message);
+  }
 }
 
 async function handlePinSubmit(event) {
@@ -213,6 +272,11 @@ async function handleVoteSubmit(event) {
     clearSession();
     showDoneScreen();
   } catch (error) {
+    if (error.status === 401) {
+      clearSession();
+      showPinScreen(error.message);
+      return;
+    }
     showAlert(alert, error.message);
     submitBtn.disabled = false;
   }
@@ -221,11 +285,11 @@ async function handleVoteSubmit(event) {
 function init() {
   document.getElementById('pin-form').addEventListener('submit', handlePinSubmit);
   document.getElementById('vote-form').addEventListener('submit', handleVoteSubmit);
+  document.getElementById('exit-session-btn').addEventListener('click', handleExitSession);
 
   const saved = loadSession();
-  if (saved?.group && saved?.token) {
-    session = saved;
-    showVoteScreen(saved);
+  if (saved?.token) {
+    restoreSession(saved);
   }
 }
 
