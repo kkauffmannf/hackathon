@@ -1,18 +1,18 @@
-const GROUPS = ['A', 'B', 'C', 'D', 'E'];
+const GROUPS = ['1', '2', '3', '4', '5'];
 
 const GROUP_NAMES = {
-  A: 'Anamnesis interminable',
-  B: 'Informes en jerga médica',
-  C: 'Consultas urgentes a las 2am',
-  D: 'Dudas de nutrición',
-  E: 'Cálculo de dosis a mano',
+  '1': 'El informe funcional consume la sesión',
+  '2': '¿Qué actividad terapéutica elijo?',
+  '3': 'La familia no sabe qué hacer en casa',
+  '4': 'El plan terapéutico no lo entiende nadie',
+  '5': 'La derivación llega vacía',
 };
 
 const CLINICAL_CRITERIA = [
-  '¿La app resuelve un problema real que ocurre en clínicas de verdad?',
-  '¿Un médico veterinario la usaría mañana sin modificaciones?',
-  '¿Ahorra tiempo real de consulta o reduce errores concretos?',
-  '¿La demo mostró un caso clínico real y convincente?',
+  '¿La app resuelve un problema que ocurre de verdad en la práctica clínica en Chile?',
+  '¿Un TO la usaría mañana en su CESFAM u hospital sin modificaciones?',
+  '¿Ahorra tiempo real de sesión o mejora la calidad de la intervención?',
+  '¿La demo mostró un caso clínico convincente y realista?',
   '¿Supieron justificar por qué su problema era prioritario?',
 ];
 

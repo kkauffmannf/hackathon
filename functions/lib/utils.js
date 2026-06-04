@@ -1,18 +1,18 @@
-export const GROUPS = ['A', 'B', 'C', 'D', 'E'];
+export const GROUPS = ['1', '2', '3', '4', '5'];
 
 export const GROUP_NAMES = {
-  A: 'Anamnesis interminable',
-  B: 'Informes en jerga médica',
-  C: 'Consultas urgentes a las 2am',
-  D: 'Dudas de nutrición',
-  E: 'Cálculo de dosis a mano',
+  '1': 'El informe funcional consume la sesión',
+  '2': '¿Qué actividad terapéutica elijo?',
+  '3': 'La familia no sabe qué hacer en casa',
+  '4': 'El plan terapéutico no lo entiende nadie',
+  '5': 'La derivación llega vacía',
 };
 
 export const CLINICAL_CRITERIA = [
-  '¿La app resuelve un problema real que ocurre en clínicas de verdad?',
-  '¿Un médico veterinario la usaría mañana sin modificaciones?',
-  '¿Ahorra tiempo real de consulta o reduce errores concretos?',
-  '¿La demo mostró un caso clínico real y convincente?',
+  '¿La app resuelve un problema que ocurre de verdad en la práctica clínica en Chile?',
+  '¿Un TO la usaría mañana en su CESFAM u hospital sin modificaciones?',
+  '¿Ahorra tiempo real de sesión o mejora la calidad de la intervención?',
+  '¿La demo mostró un caso clínico convincente y realista?',
   '¿Supieron justificar por qué su problema era prioritario?',
 ];
 
@@ -45,11 +45,11 @@ export function errorResponse(message, status = 400) {
 
 export function getPins(env) {
   return {
-    A: env.GROUP_A_PIN,
-    B: env.GROUP_B_PIN,
-    C: env.GROUP_C_PIN,
-    D: env.GROUP_D_PIN,
-    E: env.GROUP_E_PIN,
+    '1': env.GROUP_1_PIN,
+    '2': env.GROUP_2_PIN,
+    '3': env.GROUP_3_PIN,
+    '4': env.GROUP_4_PIN,
+    '5': env.GROUP_5_PIN,
   };
 }
 

@@ -1,6 +1,6 @@
-# Votación Hackathon — Veterinary AI
+# Votación Hackathon — TO AI
 
-Sistema simple de votación entre pares para 5 grupos (A–E), con rúbrica completa, PIN por grupo y tablero de podio en vivo.
+Sistema simple de votación entre pares para 5 grupos (1–5), con rúbrica completa, PIN por grupo y tablero de podio en vivo. Taller de Terapia Ocupacional.
 
 ## URLs
 
@@ -57,11 +57,11 @@ En **Settings → Environment variables** (Production), agrega:
 
 | Variable | Ejemplo | Descripción |
 |----------|---------|-------------|
-| `GROUP_A_PIN` | `4821` | PIN del Grupo A |
-| `GROUP_B_PIN` | `7392` | PIN del Grupo B |
-| `GROUP_C_PIN` | `1056` | PIN del Grupo C |
-| `GROUP_D_PIN` | `8834` | PIN del Grupo D |
-| `GROUP_E_PIN` | `2917` | PIN del Grupo E |
+| `GROUP_1_PIN` | `4821` | PIN del Grupo 1 |
+| `GROUP_2_PIN` | `7392` | PIN del Grupo 2 |
+| `GROUP_3_PIN` | `1056` | PIN del Grupo 3 |
+| `GROUP_4_PIN` | `8834` | PIN del Grupo 4 |
+| `GROUP_5_PIN` | `2917` | PIN del Grupo 5 |
 | `ADMIN_PIN` | `hackathon2026` | PIN del profesor |
 | `TOKEN_SECRET` | `cambia-esto-por-algo-largo` | Firma de sesión (cualquier string largo) |
 
@@ -71,9 +71,19 @@ En **Settings → Environment variables** (Production), agrega:
 - Proyecta `/results.html` en pantalla compartida
 - Los estudiantes votan en `/`
 
+## Grupos y proyectos
+
+| Grupo | Proyecto |
+|-------|----------|
+| 1 | El informe funcional consume la sesión |
+| 2 | ¿Qué actividad terapéutica elijo? |
+| 3 | La familia no sabe qué hacer en casa |
+| 4 | El plan terapéutico no lo entiende nadie |
+| 5 | La derivación llega vacía |
+
 ## Cómo funciona la votación
 
-1. Cada grupo ingresa su PIN → se identifica como A, B, C, D o E
+1. Cada grupo ingresa su PIN → se identifica como 1, 2, 3, 4 o 5
 2. Evalúa los **4 grupos restantes** con la rúbrica (5 criterios clínicos + 5 de diseño por grupo)
 3. Un checkbox marcado = 1 punto
 4. El servidor rechaza:
@@ -105,11 +115,11 @@ npx wrangler pages dev . --d1 DB=hackathon-votes --local
 Crea un archivo `.dev.vars` con los PINs para probar en local:
 
 ```
-GROUP_A_PIN=1111
-GROUP_B_PIN=2222
-GROUP_C_PIN=3333
-GROUP_D_PIN=4444
-GROUP_E_PIN=5555
+GROUP_1_PIN=1111
+GROUP_2_PIN=2222
+GROUP_3_PIN=3333
+GROUP_4_PIN=4444
+GROUP_5_PIN=5555
 ADMIN_PIN=admin
 TOKEN_SECRET=local-dev-secret
 ```
