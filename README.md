@@ -1,6 +1,6 @@
-# Votación Hackathon — TO AI
+# Votación Hackathon — IA Obstetricia y Puericultura
 
-Sistema simple de votación entre pares para 5 grupos (1–5), con rúbrica completa, PIN por grupo y tablero de podio en vivo. Taller de Terapia Ocupacional.
+Sistema simple de votación entre pares para 5 grupos (1–5), con rúbrica completa, PIN por grupo y tablero de podio en vivo. Taller 4 de Obstetricia y Puericultura.
 
 ## URLs
 
@@ -75,11 +75,11 @@ En **Settings → Environment variables** (Production), agrega:
 
 | Grupo | Proyecto |
 |-------|----------|
-| 1 | El informe funcional consume la sesión |
-| 2 | ¿Qué actividad terapéutica elijo? |
-| 3 | La familia no sabe qué hacer en casa |
-| 4 | El plan terapéutico no lo entiende nadie |
-| 5 | La derivación llega vacía |
+| 1 | Ingreso a control prenatal interminable |
+| 2 | El alta posparto que nadie entiende |
+| 3 | Consultas urgentes a las 2 am |
+| 4 | Las mismas dudas de lactancia |
+| 5 | Se me olvidó la pastilla |
 
 ## Cómo funciona la votación
 

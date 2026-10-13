@@ -1,25 +1,25 @@
 const GROUPS = ['1', '2', '3', '4', '5'];
 
 const GROUP_NAMES = {
-  '1': 'El informe funcional consume la sesión',
-  '2': '¿Qué actividad terapéutica elijo?',
-  '3': 'La familia no sabe qué hacer en casa',
-  '4': 'El plan terapéutico no lo entiende nadie',
-  '5': 'La derivación llega vacía',
+  '1': 'Ingreso a control prenatal interminable',
+  '2': 'El alta posparto que nadie entiende',
+  '3': 'Consultas urgentes a las 2 am',
+  '4': 'Las mismas dudas de lactancia',
+  '5': 'Se me olvidó la pastilla',
 };
 
 const CLINICAL_CRITERIA = [
-  '¿La app resuelve un problema que ocurre de verdad en la práctica clínica en Chile?',
-  '¿Un TO la usaría mañana en su CESFAM u hospital sin modificaciones?',
-  '¿Ahorra tiempo real de sesión o mejora la calidad de la intervención?',
-  '¿La demo mostró un caso clínico convincente y realista?',
+  '¿La app resuelve un problema que ocurre de verdad en la práctica de la matronería en Chile?',
+  '¿Una matrona la usaría mañana en su CESFAM, maternidad u hospital sin modificaciones?',
+  '¿Ahorra tiempo real de consulta o mejora la atención de la usuaria?',
+  '¿La demo mostró que la app detecta correctamente su caso trampa?',
   '¿Supieron justificar por qué su problema era prioritario?',
 ];
 
 const DESIGN_CRITERIA = [
   '¿La app tiene un flujo lógico entre sus widgets? ¿Se entiende cómo usarla?',
   '¿El prompt produce respuestas claras, consistentes y bien estructuradas?',
-  '¿La app guía bien al usuario o lo deja perdido?',
+  '¿La app guía bien a la usuaria o la deja perdida?',
   '¿Se nota que iteraron y mejoraron el prompt durante el taller?',
   '¿Los 2+ widgets se complementan o simplemente coexisten?',
 ];
