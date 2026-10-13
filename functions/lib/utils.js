@@ -59,10 +59,14 @@ function bufferToHex(buffer) {
 
 
 export async function getVotingEpoch(env) {
-  const row = await env.DB.prepare(
-    "SELECT value FROM meta WHERE key = 'voting_epoch'"
-  ).first();
-  return row ? Number(row.value) || 0 : 0;
+  try {
+    const row = await env.DB.prepare(
+      "SELECT value FROM meta WHERE key = 'voting_epoch'"
+    ).first();
+    return row ? Number(row.value) || 0 : 0;
+  } catch {
+    return 0;
+  }
 }
 
 export async function incrementVotingEpoch(env) {

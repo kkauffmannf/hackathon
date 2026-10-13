@@ -35,7 +35,20 @@ export async function onRequestPost(context) {
     ).bind(voterGroup, JSON.stringify(body.scores)).run();
 
     return jsonResponse({ ok: true, message: 'Voto registrado correctamente' });
-  } catch {
+  } catch (err) {
+    const msg = err?.message || '';
+    if (msg.includes('CHECK constraint') || msg.includes('voter_group')) {
+      return errorResponse(
+        'La base de datos no está actualizada para grupos 1–5. El profesor debe ejecutar migrate-d1.sql en D1.',
+        500
+      );
+    }
+    if (msg.includes('no such table')) {
+      return errorResponse(
+        'La base de datos no está configurada. Ejecuta schema.sql o migrate-d1.sql en D1.',
+        500
+      );
+    }
     return errorResponse('Error al guardar el voto', 500);
   }
 }
