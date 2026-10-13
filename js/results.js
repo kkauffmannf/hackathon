@@ -42,13 +42,13 @@ function renderPodiumSection(category, ranking) {
   const stage = PLACE_ORDER.map((place) => {
     const entries = byPlace[place] || [];
     if (entries.length === 0) return renderPodiumBlock(null);
-    if (entries.length === 1) return renderPodiumBlock(entries[0]);
+    if (entries.length === 1) return renderPodiumBlock({ ...entries[0], name: `Grupo ${entries[0].group}` });
 
     const combined = entries.map((e) => `${e.group} (${e.score})`).join(' / ');
     return renderPodiumBlock({
       place,
       group: combined,
-      name: entries.map((e) => e.name).join(' · '),
+      name: entries.map((e) => `Grupo ${e.group}`).join(' · '),
       score: entries[0].score,
     });
   }).join('');
